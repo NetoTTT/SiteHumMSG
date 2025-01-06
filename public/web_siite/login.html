@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> HumMSG - Tela Inicial </title>
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="scroll-up-btn">
+        <ion-icon name="chevron-up-outline"></ion-icon>
+    </div>
+    <div class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="#">Hum<span>MSG</span></a></div>
+            <ul class="menu">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#services">Atividades</a></li>
+                <li><a href="#skills">Metas</a></li>
+                <li><a href="#teams">Equipe</a></li>
+                <li><a href="#" class="logout-btn">Sair</a></li>
+            </ul>
+            <div class="menu-btn">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+        </div>
+    </div>
+
+    <!--home inicio-->
+    <section class="home" id="home">
+        <div class="max-width">
+            <div class="home-content">
+                <div class="text-1">Cuidando da Mente de quem </div>
+                <div class="text-2"> Programa o Futuro.</div>
+                <div class="text-3">Nós Somos <span class="typing"></span></div>
+                <a href="#contact">Contatos</a>
+            </div>
+        </div>
+    </section>
+
+   <!--
+    <section class="about" id="about">
+        <div class="max-width">
+            <h2 class="title">Nossa Psicóloga </h2>
+            <div class="about-content">
+                <div class="column left">
+                    <img src="/image/img.jpg" alt="">
+                </div>
+                <div class="column right">
+                    <div class="text">Me chamo Gllenda Hellen, sou <span class="typing-2"></span></div>
+                    <p>Na psicologia existem várias abordagens a qual o profissional busca embasar suas
+                        técnicas, no meu caso a abordagem que direciona minhas terapias é a Terapia Analítico-
+                        Comportamental, conhecida também como Analise do Comportamento (AC) ou mesmo o Behaviorismo.
+                    </p>
+                    <a href="https://www.instagram.com/psic.cardoso/profilecard/?igsh=MXFkZ3BvZ29vNmlwag==">Veja Mais
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    -->
+    <!--sessão serviços-->
+    <section class="services" id="services">
+        <div class="max-width">
+            <h2 class="title">Atividades</h2>
+            <div class="serv-content">
+
+                <div class="card" onclick="window.location.href='criarRotina.html';">
+                    <div class="box">
+                        <ion-icon name="chatbox-ellipses-sharp"></ion-icon>
+                        <div class="text">Criar Rotina</div>
+                        <p>Ainda não possui uma rotina? Clique aqui para criarmos a sua.</p>
+                    </div>
+                </div>
+
+
+                <div class="card"
+                    onclick="window.location.href='//docs.google.com/forms/d/e/1FAIpQLSd4dXkKldVpxjAJ4oOcSXqAbDMWi-IHnezJ1M49BBoZ0kI8zA/viewform?usp=sf_link';"
+                    style="cursor: pointer;">
+                    <div class="box">
+                        <ion-icon name="bookmarks-sharp"></ion-icon>
+                        <div class="text"> Feedback </div>
+                        <p>Feedback é uma ferramenta essencial para o desenvolvimento pessoal e profissional.</p>
+                    </div>
+                </div>
+
+                <div class="card" onclick="window.location.href='/detalhesRotina.html';">
+                    <div class="box">
+                        <ion-icon name="code-slash-sharp"></ion-icon>
+                        <div class="text">Acessar Minha Rotina</div>
+                        <p>Clique aqui para acessar sua rotina personalizada.</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!--sessão especialidade-->
+    <section class="skills" id="skills">
+        <div class="max-width">
+            <h2 class="title">Metas</h2>
+            <div class="skills-content">
+                <div class="column left">
+                    <div class="text">Nossas Metas</div>
+                    <p> - Desenvolvimento de um novo produto.
+                    <p>
+                        - Lançamento de uma campanha de marketing. </p>
+                    - Implementação de novos processos internos. </p>
+                    <a href="#">Mais informações</a>
+                </div>
+                <div class="column right">
+                    <div class="bars">
+                        <div class="info">
+                            <span>HTML</span>
+                            <span>93%</span>
+                        </div>
+                        <div class="line html"></div>
+                    </div>
+                    <div class="bars">
+                        <div class="info">
+                            <span>CSS</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="line css"></div>
+                    </div>
+                    <div class="bars">
+                        <div class="info">
+                            <span>JavaScript</span>
+                            <span>87%</span>
+                        </div>
+                        <div class="line js"></div>
+                    </div>
+                    <div class="bars">
+                        <div class="info">
+                            <span>PHP</span>
+                            <span>47%</span>
+                        </div>
+                        <div class="line php"></div>
+                    </div>
+                    <div class="bars">
+                        <div class="info">
+                            <span>MySQL</span>
+                            <span>42%</span>
+                        </div>
+                        <div class="line mysql"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!--
+    
+    <section class="teams" id="teams">
+        <div class="max-width">
+            <h2 class="title">Nossa Equipe</h2>
+            <div class="carousel owl-carousel ">
+                <div class="card">
+                    <div class="box">
+                        <img src="/image/img-1.jpg" alt="">
+                        <div class="text">Gabriel</div>
+                        <p> Dev Front End (Html,CSS, JavaScript)</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <img src="/image/img-2.jpg" alt="">
+                        <div class="text">Louise</div>
+                        <p>Dev Front End (Html,CSS, JavaScript)</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <img src="/image/img-3.jpg" alt="">
+                        <div class="text">Lourival</div>
+                        <p>Dev Back End (PHP,SQL,FireBase,Java)</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <img src="/image/img-4.jpg" alt="">
+                        <div class="text">Adenilton</div>
+                        <p>Dev Front End (Html,CSS, JavaScript)</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <img src="/image/img-5.jpg" alt="">
+                        <div class="text">Wendel</div>
+                        <p>Dev Front End (Html,CSS, JavaScript)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+    </section>
+
+    <!--Sessão contato-->
+    <section class="contact" id="contact">
+        <div class="max-width">
+            <h2 class="title">Contato</h2>
+            <div class="contact-content">
+                <div class="column left">
+                    <div class="text">Fale Conosco</div>
+                    <p> Aqui, você pode enviar dúvidas, sugestões, solicitações ou qualquer outro tipo de feedback. </p>
+                    Nossa equipe está à disposição para ajudá-lo e garantir que sua experiência seja a melhor possível.
+                    Não hesite em nos procurar!</p>
+
+                    <div class="icons">
+                        <div class="row">
+                            <ion-icon name="person-outline"></ion-icon>
+                            <div class="info">
+                                <div class="head">Nome</div>
+                                <div class="sub-title"> DevCare </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ion-icon name="earth-outline"></ion-icon>
+                            <div class="info">
+                                <div class="head">Endereço</div>
+                                <div class="sub-title">Xique-Xique,BA</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ion-icon name="person-outline"></ion-icon>
+                            <div class="info">
+                                <div class="head">Email</div>
+                                <div class="sub-title">DevCare@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--column left-->
+                <div class="column rigth">
+                    <div class="text">Mensagem</div>
+                    <form action="#">
+                        <div class="fields">
+                            <div class="field name">
+                                <input type="text" placeholder="Nome" required>
+                            </div>
+                            <div class="field email">
+                                <input type="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="field">
+                                <input type="text" placeholder="Sobrenome" required>
+                            </div>
+                            <div class="field textarea">
+                                <textarea cols="30" rows="10" placeholder="Escrever...." required></textarea>
+                            </div>
+                            <div class="button">
+                                <button type="submit">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--sessão  footer-->
+    <footer>
+        <span>DevCare <a href="#">Home</a> | Todos os direitos reservado - 2024</span>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scriipt.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <script type="module">
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDC2WhGePbcE58oGDIYQAi7zz8qp4FiIls",
+            authDomain: "devcareweb.firebaseapp.com",
+            projectId: "devcareweb",
+            storageBucket: "devcareweb.firebasestorage.app",
+            messagingSenderId: "774221694310",
+            appId: "1:774221694310:web:07f7fbe7ac0993e1f5f4a7",
+            measurementId: "G-HM1HVRF7NS"
+        };
+
+        // Inicializando o Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Verificar se o usuário está logado
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Se o usuário não estiver logado, redirecionar para a tela de login
+                window.location.href = "/403.html";
+            } else {
+                localStorage.setItem("userName", user.displayName);
+                // O usuário está logado, pode acessar a página
+                console.log("Usuário logado:", user.displayName || user.email);
+            }
+        });
+
+        // Função para logout
+        const logoutButton = document.querySelector(".logout-btn"); // Selecionar o botão "Sair"
+        logoutButton.addEventListener("click", async (event) => {
+            event.preventDefault(); // Previne o comportamento padrão do link
+
+            try {
+                await signOut(auth); // Faz o logout
+                alert("Você foi deslogado com sucesso!");
+                window.location.href = "/index.html"; // Redireciona para a página inicial após o logout
+            } catch (error) {
+                console.error("Erro ao sair:", error.message);
+                alert("Erro ao sair, tente novamente.");
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

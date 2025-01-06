@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+
+    <script src="https://kit.fontawesome.com/3a7225da88.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="FormLogin.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="/index.html"> HumMSG </a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form action="" method="POST" class="sign-in-form">
+                    <h2 class="signin title">Login</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="username" placeholder="Email" required>
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" placeholder="Senha" required>
+                    </div>
+                    <input type="submit" value="Entrar" class="btn solid">
+
+                    <p class="forgot-password">
+                        <a href="/web_siite/forgot_password.html">Esqueceu sua senha?</a>
+                    </p>
+
+                    <p class="social-text">Ou faça login em plataformas sociais</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon google-login">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+
+                </form>
+
+                <form action="" class="sign-up-form" method="post">
+
+                    <h2 class="signup title">Inscrever-se</h2>
+
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="username" placeholder="Nome" required>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" placeholder="Senha" required>
+                    </div>
+
+                    <input type="submit" value="Cadastrar" class="btn solid">
+
+
+                    <p class="social-text">Ou assine com plataformas sociais</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon google-signup">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Novo aqui?</h3>
+                    <p>Ao se inscrever ou atualizar seus dados no Cadastro Único, você pode tentar participar de vários
+                        programas sociais.</p>
+                    <button class="btn transparent" id="sign-up-btn">Inscrever-se</button>
+                </div>
+
+                <img src="assets/img/undraw_maker_launch_crhe.svg" class="image" alt="Rock">
+            </div>
+
+
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Um de nós ?</h3>
+                    <p>Seja um de Nós · Junte-se a nós! Buscamos continuamente por novos talentos, por novas idéias e
+                        experiências que possam oxigenar nossa organização e por pessoas .</p>
+                    <button class="btn transparent" id="sign-in-btn">Entrar</button>
+                </div>
+
+                <img src="assets/img/undraw_press_play_bx2d.svg" class="image" alt="Rock">
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+        import { getAuth, updateProfile, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
+    
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDC2WhGePbcE58oGDIYQAi7zz8qp4FiIls",
+            authDomain: "devcareweb.firebaseapp.com",
+            projectId: "devcareweb",
+            storageBucket: "devcareweb.firebasestorage.app",
+            messagingSenderId: "774221694310",
+            appId: "1:774221694310:web:07f7fbe7ac0993e1f5f4a7",
+            measurementId: "G-HM1HVRF7NS"
+        };
+    
+        // Inicializando o Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app); // Referência à autenticação
+    
+        // Função de login com email e senha (tradicional)
+        const form = document.querySelector(".sign-in-form");
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault(); // Evita o envio padrão do formulário
+    
+            const email = form.username.value;
+            const password = form.password.value;
+    
+            try {
+                // Login com email e senha
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+    
+                if (!user.emailVerified) {
+                    alert("Seu e-mail não foi verificado. Enviamos um link de verificação para o seu e-mail.");
+                    // Envia novamente o link de verificação
+                    await sendEmailVerification(user);
+                    return;
+                }
+    
+                // Exibir o nome ou email do usuário
+                const userName = user.displayName || user.email; // Se o displayName estiver vazio, usa o email
+                localStorage.setItem("userName", userName); // Salva o nome do usuário no localStorage
+                alert(`Usuário logado com sucesso! Bem-vindo ${userName}`);
+    
+                // Redireciona para a página de login após o sucesso
+                window.location.href = "/web_siite/login.html";
+            } catch (error) {
+                alert(`Erro ao logar: ${error.message}`);
+            }
+        });
+    
+        // Função de cadastro com email e senha
+        const registerForm = document.querySelector(".sign-up-form");
+        registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault(); // Impede o envio padrão do formulário
+    
+            const email = registerForm.email.value;
+            const password = registerForm.password.value;
+            const username = registerForm.username.value;
+    
+            // Validação para senha mínima de 6 dígitos
+            if (password.length < 6) {
+                alert("A senha deve ter no mínimo 6 caracteres.");
+                return; // Impede o envio do formulário
+            }
+    
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+    
+                // Atualiza o displayName do usuário
+                await updateProfile(user, {
+                    displayName: username,
+                });
+    
+                // Salva o nome do usuário no localStorage
+                localStorage.setItem("userName", username);
+    
+                // Envia o e-mail de verificação
+                await sendEmailVerification(user);
+    
+                alert(`Usuário ${username || "cadastrado"} com sucesso! Por favor, verifique seu e-mail para concluir o cadastro.`);
+    
+                // Enviar solicitação de verificação via API
+                const response = await fetch("https://apidevcare.up.railway.app/verifyEmail", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email: user.email }) // Envia o e-mail do usuário para a API
+                });
+    
+                const data = await response.json();
+                if (data.success) {
+                    console.log("E-mail de verificação enviado.");
+                } else {
+                    console.log("Erro ao enviar e-mail de verificação pela API.");
+                }
+    
+                // Não redireciona para a página de login ainda, pois o e-mail precisa ser verificado
+            } catch (error) {
+                alert(`Erro ao cadastrar: ${error.message}`);
+            }
+        });
+    
+        // Função de login com Google
+        document.querySelector(".google-login").addEventListener("click", async () => {
+            const provider = new GoogleAuthProvider();
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+    
+                if (!user.emailVerified) {
+                    alert("Seu e-mail não foi verificado. Enviamos um link de verificação para o seu e-mail.");
+                    // Envia novamente o link de verificação
+                    await sendEmailVerification(user);
+                    return;
+                }
+    
+                localStorage.setItem("userName", user.displayName); // Salva o nome do usuário no localStorage
+                alert(`Login com Google bem-sucedido! Bem-vindo ${user.displayName}`);
+    
+                // Redireciona para a página de login após o sucesso
+                window.location.href = "/web_siite/login.html";
+            } catch (error) {
+                console.error("Erro ao fazer login com Google:", error);
+                alert(`Erro ao fazer login com Google: ${error.message}`);
+            }
+        });
+    
+        // Função de cadastro com Google
+        document.querySelector(".google-signup").addEventListener("click", async () => {
+            const provider = new GoogleAuthProvider();
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+    
+                if (!user.emailVerified) {
+                    alert("Seu e-mail não foi verificado. Enviamos um link de verificação para o seu e-mail.");
+                    // Envia novamente o link de verificação
+                    await sendEmailVerification(user);
+                    return;
+                }
+    
+                localStorage.setItem("userName", user.displayName); // Salva o nome do usuário no localStorage
+                alert(`Cadastro com Google bem-sucedido! Bem-vindo ${user.displayName}`);
+    
+                // Redireciona para a página de login após o sucesso
+                window.location.href = "/web_siite/login.html";
+            } catch (error) {
+                console.error("Erro ao fazer cadastro com Google:", error);
+                alert(`Erro ao fazer cadastro com Google: ${error.message}`);
+            }
+        });
+    
+        // Monitorar o estado de autenticação
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // O usuário está autenticado
+                console.log(`Usuário logado: ${user.displayName}`);
+            } else {
+                // O usuário não está autenticado
+                console.log("Usuário não autenticado");
+            }
+        });
+    </script>
+    
+
+</body>
+
+</html>

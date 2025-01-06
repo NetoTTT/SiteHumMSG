@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HumMSG</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <header class="container header">
+    <nav class="nav">
+      <div class="logo">
+        <h2>HumMSG</h2>
+      </div>
+
+      <div class="nav_menu" id="nav_menu">
+        <button class="close_btn" id="close_btn">
+          <i class="ri-close-fill"></i>
+        </button>
+
+        <ul class="nav_menu_list">
+          <li class="nav_menu_item">
+            <a href="index.html" class="nav_menu_link">Home</a>
+          </li>
+          <li class="nav_menu_item">
+            <a href="/web_siite/Sobre.html" class="nav_menu_link">Sobre</a>
+          </li>
+          <li class="nav_menu_item">
+            <a href="web_siite/FormLogin.html" class="nav_menu_link">LOGIN</a>
+          </li>
+        </ul>
+      </div>
+
+      <button class="toggle_btn" id="toggle_btn">
+        <i class="ri-menu-line"></i>
+      </button>
+    </nav>
+  </header>
+
+  <section class="wrapper">
+    <div class="container">
+      <div class="grid-cols-2">
+        <div class="grid-item-1">
+          <h1 class="main-heading">
+            <span>HumMSG</span>
+            <br />
+            Automatize suas Mensagens<br>
+            Como nunca antes visto.
+          </h1>
+          <p class="info-text">
+            Ferramentas e recursos para automatizar mensagens nas Redes Socias.
+          </p>
+
+          <div class="btn_wrapper">
+            <a href="/web_siite/Contatos.html" class="btn view_more_btn">
+              Contatos <i class="ri-arrow-right-line"></i>
+            </a>
+
+          </div>
+        </div>
+        <div class="grid-item-2">
+          <div class="team_img_wrapper">
+            <img src="/web_siite/img/team.svg" alt="team-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-links">
+        <a href="/web_siite/Sobre.html">Sobre nós</a>
+        <a href="/web_siite/Contatos.html">Contato</a>
+        <a href="termos.html">Termos de Serviço</a>
+        <a href="privacidade.html">Política de Privacidade</a>
+      </div>
+      <div class="contact-info">
+        <p>E-mail: humanitscia@gmail.com</p>
+        <p>Telefone: (75) 983439297</p>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/?locale=pt_BR"><img src="/web_siite/img/facebook.png" alt="Facebook"></a>
+        <a href="https://twitter.com/?lang=pt-br"><img src="/web_siite/img/Twitter.png" alt="Twitter"></a>
+        <a href="https://www.instagram.com/"><img src="/web_siite/img/instagram.png" alt="Instagram"></a>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2024 Todos os direitos reservados. HumMSG.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+
+<!--
+  
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-messaging.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDC2WhGePbcE58oGDIYQAi7zz8qp4FiIls",
+      authDomain: "devcareweb.firebaseapp.com",
+      projectId: "devcareweb",
+      storageBucket: "devcareweb.appspot.com",
+      messagingSenderId: "774221694310",
+      appId: "1:774221694310:web:07f7fbe7ac0993e1f5f4a7",
+      measurementId: "G-HM1HVRF7NS"
+    };
+
+    // Inicializar o Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const messaging = firebase.messaging();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Verificar se o navegador suporta notificações
+      if ('Notification' in window && navigator.serviceWorker) {
+        // Solicitar permissão para notificações
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            // O usuário concedeu permissão, então vamos registrar o Service Worker
+            navigator.serviceWorker.register('/firebase-messaging-sw.js')
+              .then(registration => {
+                console.log("Service Worker registrado com sucesso: ", registration);
+                // Obter o token de inscrição do FCM
+                messaging.getToken({ vapidKey: 'YOUR_VAPID_KEY' }).then((currentToken) => {
+                  if (currentToken) {
+                    console.log("Token de inscrição: ", currentToken);
+                    // Aqui você pode enviar o token ao seu servidor para salvar o token e usar no envio de notificações.
+                  } else {
+                    console.log("Não foi possível obter o token de inscrição.");
+                  }
+                }).catch((err) => {
+                  console.log('Erro ao obter o token de inscrição: ', err);
+                });
+              }).catch(err => {
+                console.log("Erro ao registrar o Service Worker: ", err);
+              });
+          } else {
+            console.log("Permissão para notificações não concedida.");
+          }
+        });
+      } else {
+        console.log("Este navegador não suporta notificações ou Service Workers.");
+      }
+
+      // Lidar com mensagens em primeiro plano
+      messaging.onMessage(function (payload) {
+        console.log("Mensagem recebida em primeiro plano: ", payload);
+
+        // Exibir a notificação diretamente na página
+        const notificationTitle = 'Hora de desacelerar!';
+        const notificationOptions = {
+          body: 'Dê uma pausa de 5 minutos. Isso vai te ajudar a melhorar a produtividade e manter o desempenho.',
+          icon: '/icons/icon-192x192.png'
+        };
+
+        new Notification(notificationTitle, notificationOptions);
+      });
+    });
+
+  </script>
+
+-->
+</body>
+
+</html>

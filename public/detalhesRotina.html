@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Rotina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-in-out;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .tips {
+            margin-top: 20px;
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        .tips h3 {
+            margin-top: 0;
+            color: #0056b3;
+        }
+
+        .action-plan {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 5px solid #007bff;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+
+            60% {
+                transform: translateY(10px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Detalhes da Sua Rotina</h1>
+    </header>
+
+    <div class="container" id="routine-details">
+        <p>Carregando detalhes...</p>
+    </div>
+
+    <button onclick="window.location.href = '/web_siite/login.html'">Voltar</button>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDC2WhGePbcE58oGDIYQAi7zz8qp4FiIls",
+            authDomain: "devcareweb.firebaseapp.com",
+            projectId: "devcareweb",
+            storageBucket: "devcareweb.firebasestorage.app",
+            messagingSenderId: "774221694310",
+            appId: "1:774221694310:web:07f7fbe7ac0993e1f5f4a7",
+            measurementId: "G-HM1HVRF7NS"
+        };
+
+        // Inicializando Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Função para carregar os detalhes da rotina
+        async function loadRoutineDetails(user) {
+            if (user) {
+                const userId = user.uid;  // Pega o UID do usuário autenticado
+                const userRef = doc(db, "RotinasUsers", userId);
+                const userDoc = await getDoc(userRef);
+
+                if (userDoc.exists()) {
+                    const routine = userDoc.data().routine;
+
+                    // Verifica o tipo da rotina e adiciona conteúdo específico
+                    let routineDetails = "";
+                    if (routine === "Rotina A") {
+                        routineDetails = `
+        <h2>Rotina para Pressão e Prazos Apertados</h2>
+        <p>Olá, sou a psicóloga Gllenda Hellen Cardoso. Vejo que você tem se sentido muito pressionado(a) devido aos prazos apertados. Não se preocupe, vou te ajudar com algumas dicas!</p>
+        <div class="tips">
+            <h3>Dica Técnica:</h3>
+            <p>Organize suas tarefas usando uma metodologia como Kanban ou Scrum. Isso ajuda a visualizar o que precisa ser feito e priorizar entregas com mais eficiência.</p>
+        </div>
+        <div class="action-plan">
+            <h3>Como isso ajuda:</h3>
+            <p>Ter uma visão clara das tarefas reduz a sensação de sobrecarga e dá a percepção de progresso, mesmo com prazos curtos.</p>
+            <h3>Ação prática:</h3>
+            <p>Divida sua meta em subtarefas diárias. Por exemplo, use ferramentas como uma simples planilha para acompanhar o progresso. Lembre-se: cada passo dado é um progresso!</p>
+        </div>
+    `;
+                    }
+                    else if (routine === "Rotina B") {
+                        routineDetails = `
+        <h2>Rotina para Cultura de Trabalho de Longas Horas</h2>
+        <p>Olá, sou a psicóloga Gllenda Hellen Cardoso. Vejo que você tem dedicado longas horas do seu dia no trabalho e isso tem te deixado de certa forma cansado(a). Calma, nem tudo está perdido, abaixo te dou algumas dicas que vão te ajudar!</p>
+        <div class="tips">
+            <h3>Dica Técnica:</h3>
+            <p>Implemente a técnica Pomodoro (25 minutos de foco e 5 minutos de pausa). Esse método aumenta a produtividade enquanto permite intervalos regulares.</p>
+        </div>
+        <div class="action-plan">
+            <h3>Como isso ajuda:</h3>
+            <p>Pequenos intervalos ajudam a evitar fadiga mental e a melhorar o foco, permitindo que você seja mais produtivo sem precisar de horas extras.</p>
+            <h3>Ação prática:</h3>
+            <p>Use aplicativos como Focus Booster ou Toggl para organizar suas sessões de trabalho e pausas.</p>
+            <p>"Trabalhar muito sem descanso é como codificar sem compilar: a sobrecarga pode gerar erros. Priorize sua saúde, porque você é a peça mais importante do sistema."</p>
+        </div>
+    `;
+                    } else if (routine === "Rotina C") {
+                        routineDetails = `
+        <h2>Rotina para Isolamento e Falta de Interação Social</h2>
+        <p>Olá, sou a psicóloga Gllenda Hellen Cardoso. Vejo que você tem focado muito no virtual e acabou se isolando, ficando fora do rol social. Calma, nem tudo está perdido, abaixo te dou algumas dicas que vão te ajudar!</p>
+        <div class="tips">
+            <h3>Dica Técnica:</h3>
+            <p>Procure eventos relacionados à área de tecnologia, como workshops, palestras, ou mesmo diversões fora do contexto. Esses encontros geralmente têm um ambiente descontraído e colaborativo, ótimo para conhecer pessoas com interesses semelhantes.</p>
+        </div>
+        <div class="action-plan">
+            <h3>Como isso ajuda:</h3>
+            <p>Interações cara a cara criam laços mais fortes e podem levar a colaborações profissionais e amizades. Também permite desenvolver habilidades interpessoais que complementam o trabalho técnico.</p>
+            <h3>Ação prática:</h3>
+            <ul>
+                <li>Procure eventos que te interessam em sua cidade, interaja com pessoas com quem você se sente bem;</li>
+                <li>Estabeleça uma meta simples: conhecer pelo menos duas pessoas e trocar contatos.</li>
+            </ul>
+            <p>"Até os maiores desenvolvedores precisam de uma rede de apoio. Se conecte com colegas, amigos ou grupos de interesse.”</p>
+        </div>
+    `;
+                    } else if (routine === "Rotina D") {
+                        routineDetails = `
+        <h2>Rotina para Falta de Controle sobre o Trabalho</h2>
+        <p>Olá, sou a psicóloga Gllenda Hellen Cardoso. Vejo que você perdeu o controle sobre o seu trabalho e isso tem atrapalhado o seu desempenho. Calma, nem tudo está perdido, abaixo te dou algumas dicas que vão te ajudar!</p>
+        <div class="tips">
+            <h3>Dica Técnica:</h3>
+            <p>Comunique-se com seu gestor para alinhar expectativas. Use frameworks como SMART para definir objetivos claros e mensuráveis.</p>
+        </div>
+        <div class="action-plan">
+            <h3>Como isso ajuda:</h3>
+            <p>Ter clareza sobre o que é esperado e colaborar nas decisões aumenta a sensação de controle e reduz a frustração.</p>
+            <h3>Ação prática:</h3>
+            <p>Agende uma reunião rápida semanal com seu líder para discutir prioridades e esclarecer dúvidas sobre seu trabalho.</p>
+            <p>"Quando não é possível controlar tudo, concentre-se no que você pode melhorar. Sua capacidade de adaptação é seu maior diferencial."</p>
+        </div>
+    `;
+                    } else if (routine === "Rotina E") {
+                        routineDetails = `
+        <h2>Rotina para Ambiente Competitivo e Rápido avanço da Tecnologia.</h2>
+        <p>Olá, sou a psicóloga Gllenda Hellen Cardoso. Vejo que você tem visualizado um avanço de tudo o tempo todo e se sente obrigado(a) a avançar de igual forma, o que tem te preocupado(a). Calma, nem tudo está perdido, abaixo te dou algumas dicas que vão te ajudar!</p>
+        <div class="tips">
+            <h3>Dica Técnica:</h3>
+            <p>Escolha uma área de especialização e invista em aprendizado contínuo com cursos, livros ou projetos paralelos.</p>
+        </div>
+        <div class="action-plan">
+            <h3>Como isso ajuda:</h3>
+            <p>Focar em uma área reduz a ansiedade de "ter que saber tudo" e te torna uma referência em um campo específico.</p>
+            <h3>Ação prática:</h3>
+            <p>Defina 1 hora por semana para aprender algo novo. Use plataformas como Coursera, Udemy ou LeetCode para aprimorar suas habilidades.</p>
+            <p>"A tecnologia avança rápido, mas lembre-se: ninguém consegue dominar tudo. Escolha uma área para aprofundar e celebre cada aprendizado."</p>
+        </div>
+    `;
+                    } else if (routine === "Rotina F") {
+                        routineDetails = `
+        <h2>Rotina para Falta de Reconhecimento e Feedback Positivo</h2>
+        <p>Olá, sou a psicóloga Gllenda Hellen Cardoso. Vejo que você está tendo dificuldade em enxergar suas habilidades e potencial. Calma, nem tudo está perdido, abaixo te dou algumas dicas que vão te ajudar!</p>
+        <div class="tips">
+            <h3>Dica Técnica:</h3>
+            <p>Solicite feedback construtivo regularmente e registre suas realizações em um portfólio ou currículo técnico atualizado.</p>
+        </div>
+        <div class="action-plan">
+            <h3>Como isso ajuda:</h3>
+            <p>Receber feedback e acompanhar suas conquistas ajudam a reconhecer seu valor e criar um histórico para futuras oportunidades.</p>
+            <h3>Ação prática:</h3>
+            <p>Crie um "log" pessoal das suas contribuições em projetos no Notion, Google Docs ou GitHub, destacando desafios enfrentados e soluções criadas.</p>
+            <p>"Mesmo sem aplausos, seu trabalho faz a diferença. Reconheça suas conquistas, porque cada projeto que você conclui é uma prova do seu talento e dedicação."</p>
+        </div>
+    `;
+                    } else {
+                        routineDetails = `
+                            <h2>Sua Rotina: ${routine}</h2>
+                            <p>Esses são os detalhes completos da sua rotina...</p>
+                        `;
+                    }
+
+                    document.getElementById('routine-details').innerHTML = routineDetails;
+                } else {
+                    console.log("Usuário não tem rotina registrada.");
+                    alert("Não conseguimos encontrar sua rotina.");
+                }
+            } else {
+                console.log("Usuário não autenticado.");
+                alert("Você precisa estar logado para acessar esta página.");
+                window.location.href = "/web_siite/FormLogin.html";  // Redireciona para login se não autenticado
+            }
+        }
+
+        // Função de logout
+        async function logout() {
+            try {
+                await signOut(auth);
+                alert("Você foi deslogado com sucesso!");
+                window.location.href = "/web_siite/FormLogin.html";  // Redireciona para a página de login
+            } catch (error) {
+                console.error("Erro ao sair:", error.message);
+                alert("Erro ao sair, tente novamente.");
+            }
+        }
+
+        // Usar onAuthStateChanged para garantir que o usuário esteja autenticado
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Usuário autenticado, carregar os detalhes da rotina
+                loadRoutineDetails(user);
+            } else {
+                // Usuário não autenticado, redireciona para login
+                console.log("Usuário não autenticado.");
+                alert("Você precisa estar logado para acessar esta página.");
+                window.location.href = "/web_siite/FormLogin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

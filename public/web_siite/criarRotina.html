@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Questionário</title>
+    <style>
+                /* Reset básico */
+                * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Corpo da página */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        /* Contêiner do Quiz */
+        .quiz-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        /* Efeito de animação no contêiner */
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #007bff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Estilo das perguntas */
+        .question {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* Estilo dos campos de entrada e select */
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            background-color: #e7f3ff;
+        }
+
+        /* Botões */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #004085;
+            transform: translateY(2px);
+        }
+
+        /* Feedback */
+        .feedback {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Botão "Voltar" */
+        #back-btn {
+            background-color: #f44336;
+            margin-top: 10px;
+        }
+
+        #back-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h1>Questionário</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <label for="age">1- Qual a sua idade?</label>
+                <input type="text" id="age" name="age" required>
+            </div>
+
+            <div class="question">
+                <label for="role">2- Você é apenas estudante ou já atua profissionalmente na área de
+                    programação?</label>
+                <select id="role" name="role" required>
+                    <option value="Estudante">Estudante</option>
+                    <option value="Profissional da Área">Profissional da Área</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label for="experience">3- Se já trabalha, há quanto tempo você exerce sua profissão?</label>
+                <input type="text" id="experience" name="experience" required>
+            </div>
+
+            <div class="question">
+                <label for="work_model">4- Qual seu modelo de trabalho?</label>
+                <select id="work_model" name="work_model" required>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Remoto (home office)">Remoto (home office)</option>
+                    <option value="Semipresencial">Semipresencial</option>
+                </select>
+            </div>
+
+            <div class="question">
+                <label for="workload">5- Qual a sua jornada de trabalho?</label>
+                <input type="text" id="workload" name="workload" required>
+            </div>
+
+            <div class="question">
+                <label for="work_situation">6- Qual das situações abaixo você mais se identifica em seu ambiente de
+                    trabalho?</label>
+                <select id="work_situation" name="work_situation" required>
+                    <option value="Pressão e prazos apertados">Pressão e prazos apertados</option>
+                    <option value="Cultura de trabalho de longas horas">Cultura de trabalho de longas horas</option>
+                    <option value="Isolamento e falta de interação social">Isolamento e falta de interação social
+                    </option>
+                    <option value="Falta de controle sobre o trabalho">Falta de controle sobre o trabalho</option>
+                    <option value="Ambiente competitivo e rápido avanço da tecnologia, fazendo-o(a) sentir-se atrasado">
+                        Ambiente competitivo e rápido avanço da tecnologia, fazendo-o(a) sentir-se atrasado </option>
+                    <option value="Falta de reconhecimento e feedback positivo">Falta de reconhecimento e feedback
+                        positivo </option>
+                </select>
+            </div>
+
+            <button type="submit">Enviar Respostas</button>
+            <br>
+            <button onclick="window.location.href='login.html';"> Voltar</button>
+        </form>
+
+        <div id="feedback" class="feedback"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+    
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDC2WhGePbcE58oGDIYQAi7zz8qp4FiIls",
+            authDomain: "devcareweb.firebaseapp.com",
+            projectId: "devcareweb",
+            storageBucket: "devcareweb.firebasestorage.app",
+            messagingSenderId: "774221694310",
+            appId: "1:774221694310:web:07f7fbe7ac0993e1f5f4a7",
+            measurementId: "G-HM1HVRF7NS"
+        };
+    
+        // Inicializando Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+    
+        // Monitorar o estado de autenticação
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log(`Usuário logado: ${user.displayName}`);
+                const userId = user.uid;
+                // Verifica se o usuário já tem uma rotina registrada
+                await checkUserRoutine(userId);
+            } else {
+                console.log("Usuário não autenticado");
+                alert("Você precisa estar logado para acessar esta página.");
+                window.location.href = "/web_siite/FormLogin.html"; // Redireciona para a página de login
+            }
+        });
+    
+        // Função para salvar as respostas e rotina no Firestore, incluindo o tempo
+        async function saveQuizResponse(userId, answer6, routine, notificationTime) {
+            const userRef = doc(db, "RotinasUsers", userId); // Salva dentro da coleção RotinasUsers
+            await setDoc(userRef, {
+                answer_6: answer6,
+                routine: routine,
+                notificationTime: notificationTime
+            });
+        }
+    
+        // Função para determinar a rotina baseada na resposta da pergunta 6 e os intervalos de notificação
+        function determineRoutineAndTime(answer6) {
+            let routine = "";
+            let notificationTime = 0; // Intervalo em horas
+    
+            switch (answer6) {
+                case "Pressão e prazos apertados":
+                    routine = "Rotina A";
+                    notificationTime = 1;  // Notificação a cada 1 hora
+                    break;
+                case "Cultura de trabalho de longas horas":
+                    routine = "Rotina B";
+                    notificationTime = 2;  // Notificação a cada 2 horas
+                    break;
+                case "Isolamento e falta de interação social":
+                    routine = "Rotina C";
+                    notificationTime = 3;  // Notificação a cada 3 horas
+                    break;
+                case "Falta de controle sobre o trabalho":
+                    routine = "Rotina D";
+                    notificationTime = 4;  // Notificação a cada 4 horas
+                    break;
+                case "Ambiente competitivo e rápido avanço da tecnologia, fazendo-o(a) sentir-se atrasado":
+                    routine = "Rotina E";
+                    notificationTime = 5;  // Notificação a cada 5 horas
+                    break;
+                case "Falta de reconhecimento e feedback positivo":
+                    routine = "Rotina F";
+                    notificationTime = 6;  // Notificação a cada 6 horas
+                    break;
+                default:
+                    routine = "Sem rotina definida";
+                    notificationTime = 0;
+                    break;
+            }
+    
+            return { routine, notificationTime };
+        }
+    
+        // Função para verificar se o usuário já tem uma rotina registrada
+        async function checkUserRoutine(userId) {
+            const userRef = doc(db, "RotinasUsers", userId);
+            const userDoc = await getDoc(userRef);
+    
+            if (userDoc.exists()) {
+                // Se o documento for encontrado, redireciona para bloqRotina.html
+                window.location.href = "/bloqRotina.html";
+            }
+        }
+    
+        // Evento de envio do formulário
+        document.getElementById('quiz-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+    
+            const user = auth.currentUser;
+    
+            if (user) {
+                const userId = user.uid;  // Pega o UID do usuário autenticado
+                const answer6 = document.getElementById('work_situation').value;
+    
+                // Determina a rotina e o tempo de notificação com base na resposta
+                const { routine, notificationTime } = determineRoutineAndTime(answer6);
+    
+                // Salva as respostas, rotina e o tempo de notificação no Firestore
+                await saveQuizResponse(userId, answer6, routine, notificationTime);
+    
+                // Feedback para o usuário
+                const feedback = document.getElementById('feedback');
+                feedback.textContent = `Obrigado por responder! `;
+            } else {
+                console.log("Usuário não autenticado.");
+                alert("Você precisa estar logado para responder.");
+            }
+        });
+    </script>
+    
+
+</body>
+
+</html>

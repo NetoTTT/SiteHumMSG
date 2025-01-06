@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloqueio de Rotina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .link {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Rotina Registrada</h1>
+        <p>Você já possui uma rotina registrada! Sua rotina atual é:</p>
+        <p id="routine">Carregando...</p>
+
+        <button onclick="window.location.href = 'detalhesRotina.html'">Ver Detalhes</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";  // Importando onAuthStateChanged
+    
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDC2WhGePbcE58oGDIYQAi7zz8qp4FiIls",
+            authDomain: "devcareweb.firebaseapp.com",
+            projectId: "devcareweb",
+            storageBucket: "devcareweb.firebasestorage.app",
+            messagingSenderId: "774221694310",
+            appId: "1:774221694310:web:07f7fbe7ac0993e1f5f4a7",
+            measurementId: "G-HM1HVRF7NS"
+        };
+    
+        // Inicializando Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+    
+        // Monitorar o estado de autenticação
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // O usuário está autenticado
+                console.log(`Usuário logado: ${user.displayName}`);
+                await loadRoutine(user.uid);  // Chama a função para carregar a rotina
+            } else {
+                // O usuário não está autenticado
+                console.log("Usuário não autenticado.");
+                alert("Você precisa estar logado para acessar esta página.");
+                window.location.href = "/web_siite/FormLogin.html";  // Redireciona para login se não autenticado
+            }
+        });
+    
+        // Função para carregar a rotina do Firestore
+        async function loadRoutine(userId) {
+            const userRef = doc(db, "RotinasUsers", userId);
+            const userDoc = await getDoc(userRef);
+    
+            if (userDoc.exists()) {
+                const routine = userDoc.data().routine;
+                document.getElementById('routine').textContent = routine;  // Exibe a rotina na página
+            } else {
+                console.log("Usuário não tem rotina registrada.");
+                alert("Algo deu errado ao carregar sua rotina.");
+            }
+        }
+    
+        // Função para redirecionar para detalhes da rotina
+        function viewDetails() {
+            window.location.href = "detalhesRotina.html";  // Página de detalhes da rotina
+        }
+    </script>
+    
+</body>
+</html>
